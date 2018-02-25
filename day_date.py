@@ -14,6 +14,8 @@ def day_date(date,month,year):
     
     Output: day of the week (str).
     """
+    assert date > 0 and month > 0, "Input error."
+    
     weekdays = {
             0:"Sunday",
             1:"Monday",
@@ -107,22 +109,16 @@ def day_date(date,month,year):
     
     if year == 0:
         
-        anchor = "Year 0 does not exist."
+        print ("Year 0 does not exist.")
     
     else:
         
         yeartr = year
-        
-        count = 0
-        
+                
         if year > 0 :
             
-            while yeartr >= 400:
-            
-                yeartr = yeartr - 400
-            
-                count += 1
-                    
+            yeartr = yeartr % 400
+                                            
             minc1 = 0
             maxc1 = 99
             
@@ -151,13 +147,9 @@ def day_date(date,month,year):
                 anchor = "Error."
                 
         else:
-            
-            while year <= -400:
-                
-                yeartr - yeartr + 400
-                
-                count += 1
-                
+                            
+            yeartr = yeartr % -400
+                                
             minc1 = 0
             maxc1 = -99
             
@@ -185,83 +177,83 @@ def day_date(date,month,year):
             else:
                 anchor = "Error."    
                 
-    #doomsday per year
-    yearstr = str(year)
-            
-    last2 = int(yearstr[int(len(yearstr))-2:int(len(yearstr))])
-    
-    step1 = last2 // 12
-    
-    step2 = abs(last2 - (step1 * 12))
-    
-    step3 = step2 // 4
-    
-    step4 = weekdaysrev[anchor]
-    
-    step5 = step1 + step2 + step3 + step4
-    
-    doomsdayyear = step5 % 7
+        #doomsday per year
+        yearstr = str(year)
+                
+        last2 = int(yearstr[int(len(yearstr))-2:int(len(yearstr))])
         
-    #what day of the week
-    
-    if year % 4 == 0:
-        if year % 100 != 0:
-            #leap
-            julian = date
-            monthcalc = month - 1
-            while monthcalc > 0:
-                julian += monthdaysleap[monthcalc]
-                monthcalc -= 1
-            if date > monthdaysleap[month]:
-                print ("Date error.")
-            juliandoom = 4
-
-        else:
-            if year % 400 == 0:
+        step1 = last2 // 12
+        
+        step2 = abs(last2 - (step1 * 12))
+        
+        step3 = step2 // 4
+        
+        step4 = weekdaysrev[anchor]
+        
+        step5 = step1 + step2 + step3 + step4
+        
+        doomsdayyear = step5 % 7
+            
+        #what day of the week
+        
+        if year % 4 == 0:
+            if year % 100 != 0:
                 #leap
                 julian = date
                 monthcalc = month - 1
                 while monthcalc > 0:
                     julian += monthdaysleap[monthcalc]
-                    monthcalc -= 1    
+                    monthcalc -= 1
                 if date > monthdaysleap[month]:
                     print ("Date error.")
                 juliandoom = 4
-            
+    
             else:
-                #not leap
-                julian = date
-                monthcalc = month - 1
-                while monthcalc > 0:
-                    julian += monthdays[monthcalc]
-                    monthcalc -= 1  
-                if date > monthdays[month]:
-                    print ("Date error.")   
-                juliandoom = 3
-                    
-    else:
-        #not leap
-        julian = date
-        monthcalc = month - 1
-        while monthcalc > 0:
-            julian += monthdays[monthcalc]
-            monthcalc -= 1     
-        if date > monthdays[month]:
-            print ("Date error.") 
-        juliandoom = 3
-    
-    #day difference
-    day1 = julian % 7
-    day2 = day1 - juliandoom
-    day3 = day2 + doomsdayyear
-    
-    if day3 < 0:
-        finalday = day3 + 7
-    else:
-        finalday = day3
+                if year % 400 == 0:
+                    #leap
+                    julian = date
+                    monthcalc = month - 1
+                    while monthcalc > 0:
+                        julian += monthdaysleap[monthcalc]
+                        monthcalc -= 1    
+                    if date > monthdaysleap[month]:
+                        print ("Date error.")
+                    juliandoom = 4
+                
+                else:
+                    #not leap
+                    julian = date
+                    monthcalc = month - 1
+                    while monthcalc > 0:
+                        julian += monthdays[monthcalc]
+                        monthcalc -= 1  
+                    if date > monthdays[month]:
+                        print ("Date error.")   
+                    juliandoom = 3
                         
-    print (date, months[month], year, "is a", weekdays[finalday])
-    return finalday
+        else:
+            #not leap
+            julian = date
+            monthcalc = month - 1
+            while monthcalc > 0:
+                julian += monthdays[monthcalc]
+                monthcalc -= 1     
+            if date > monthdays[month]:
+                print ("Date error.") 
+            juliandoom = 3
+        
+        #day difference
+        day1 = julian % 7
+        day2 = day1 - juliandoom
+        day3 = day2 + doomsdayyear
+        
+        if day3 < 0:
+            finalday = day3 + 7
+        else:
+            finalday = day3
+                            
+        print (date, months[month], year, "is a", weekdays[finalday])
+        return finalday
 
 date = int(input("Date: "))
 month = int(input("Month (1-12): "))
