@@ -8,7 +8,7 @@ Created on Mon Feb 19 11:43:31 2018
 
 def day_date(date,month,year):
     """
-    Original concept by mathematician John H Conway
+    Original concept by mathematician John H Conway.
     
     Inputs: date (int), month (1 to 12), and year (int).
     
@@ -60,34 +60,34 @@ def day_date(date,month,year):
             11:30,
             12:31
             }
-    doomsdays = {
-            1:3,
-            2:28,
-            3:14,
-            4:4,
-            5:9,
-            6:6,
-            7:11,
-            8:8,
-            9:5,
-            10:10,
-            11:7,
-            12:12
-            }
-    doomsleap = {
-            1:4,
-            2:29,
-            3:14,
-            4:4,
-            5:9,
-            6:6,
-            7:11,
-            8:8,
-            9:5,
-            10:10,
-            11:7,
-            12:12
-            }
+#    doomsdays = {
+#            1:3,
+#            2:28,
+#            3:14,
+#            4:4,
+#            5:9,
+#            6:6,
+#            7:11,
+#            8:8,
+#            9:5,
+#            10:10,
+#            11:7,
+#            12:12
+#            }
+#    doomsleap = {
+#            1:4,
+#            2:29,
+#            3:14,
+#            4:4,
+#            5:9,
+#            6:6,
+#            7:11,
+#            8:8,
+#            9:5,
+#            10:10,
+#            11:7,
+#            12:12
+#            }
     months = {
             1:"January",
             2:"February",
@@ -104,6 +104,7 @@ def day_date(date,month,year):
             }
     
     #anchor day
+    
     if year == 0:
         
         anchor = "Year 0 does not exist."
@@ -114,39 +115,76 @@ def day_date(date,month,year):
         
         count = 0
         
-        while yeartr >= 400:
+        if year > 0 :
             
-            yeartr = yeartr - 400
+            while yeartr >= 400:
             
-            count += 1
+                yeartr = yeartr - 400
+            
+                count += 1
                     
-        minc1 = 0
-        maxc1 = 99
-        
-        minc2 = 100
-        maxc2 = 199
-        
-        minc3 = 200
-        maxc3 = 299
-        
-        minc4 = 300
-        maxc4 = 399
-        
-        if yeartr >= minc1 and yeartr <= maxc1:
-            anchor = weekdays[2]
+            minc1 = 0
+            maxc1 = 99
             
-        elif yeartr >= minc2 and yeartr <= maxc2:
-            anchor = weekdays[0]
-        
-        elif yeartr >= minc3 and yeartr <= maxc3:
-            anchor = weekdays[5]
+            minc2 = 100
+            maxc2 = 199
             
-        elif yeartr >= minc4 and yeartr <= maxc4:
-            anchor = weekdays[3]
+            minc3 = 200
+            maxc3 = 299
             
+            minc4 = 300
+            maxc4 = 399
+            
+            if yeartr >= minc1 and yeartr <= maxc1:
+                anchor = weekdays[2]
+                
+            elif yeartr >= minc2 and yeartr <= maxc2:
+                anchor = weekdays[0]
+            
+            elif yeartr >= minc3 and yeartr <= maxc3:
+                anchor = weekdays[5]
+                
+            elif yeartr >= minc4 and yeartr <= maxc4:
+                anchor = weekdays[3]
+                
+            else:
+                anchor = "Error."
+                
         else:
-            anchor = "Error."
-    
+            
+            while year <= -400:
+                
+                yeartr - yeartr + 400
+                
+                count += 1
+                
+            minc1 = 0
+            maxc1 = -99
+            
+            minc2 = -100
+            maxc2 = -199
+            
+            minc3 = -200
+            maxc3 = -299
+            
+            minc4 = -300
+            maxc4 = -399
+            
+            if yeartr <= minc1 and yeartr >= maxc1:
+                anchor = weekdays[3]
+                
+            elif yeartr <= minc2 and yeartr >= maxc2:
+                anchor = weekdays[5]
+            
+            elif yeartr <= minc3 and yeartr >= maxc3:
+                anchor = weekdays[0]
+                
+            elif yeartr <= minc4 and yeartr >= maxc4:
+                anchor = weekdays[2]
+                
+            else:
+                anchor = "Error."    
+                
     #doomsday per year
     yearstr = str(year)
             
